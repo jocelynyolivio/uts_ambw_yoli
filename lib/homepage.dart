@@ -12,12 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final _textController = TextEditingController();
-  @override
-  void dispose() {
-    _textController.dispose();
-    super.dispose();
-  }
+  final TextEditingController _textController = TextEditingController();
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -25,22 +21,31 @@ class HomePageState extends State<HomePage> {
       padding: const EdgeInsets.all(10.0),
       child: ListView(
         children: [
-          const TextField(
+          TextField(
+            controller: _textController,
             decoration: InputDecoration(
               hintText: "Search for restaurants..",
               border: OutlineInputBorder(),
               prefixIcon: Icon(Icons.search),
+              suffixIcon: IconButton(
+                onPressed: () {
+                  _textController.clear();
+                },
+                icon: Icon(Icons.clear),
+              ),
             ),
           ),
           Container(
+            // color: Colors.red,
             height: 200,
-            padding: const EdgeInsets.all(10.0),
+            width: 150,
+            padding: const EdgeInsets.only(top: 20.0),
             child: CarouselSlider(
               items: [
                 // Container wrapping the image with border radius
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(1.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0), // Radius sudut
                     child: Image.asset(
@@ -51,7 +56,7 @@ class HomePageState extends State<HomePage> {
                 ),
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(1.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image.asset(
@@ -62,7 +67,7 @@ class HomePageState extends State<HomePage> {
                 ),
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(1.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image.asset(
@@ -76,19 +81,43 @@ class HomePageState extends State<HomePage> {
                 autoPlay: true,
                 autoPlayInterval: const Duration(seconds: 3),
                 onPageChanged: (index, reason) {
-                  // Callback when page changes
+                  setState(() {
+                    _currentIndex = index; // Perbarui indeks halaman aktif
+                  });
+                },
+                enlargeCenterPage: true,
+              ),
+            ),
+          ),
+          Container(
+            height: 20,
+            // color: Colors.blue,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                3, // Jumlah gambar dalam CarouselSlider
+                (index) {
+                  return Container(
+                    width: 8.0,
+                    height: 8.0,
+                    margin: EdgeInsets.symmetric(horizontal: 4.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _currentIndex == index ? Colors.blue : Colors.grey,
+                    ),
+                  );
                 },
               ),
             ),
           ),
-
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
                 'Most Popular',
-                style: TextStyle(fontSize: 16, color: Colors.black),
+                style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: "Times new roman", fontWeight: FontWeight.bold),
                 textAlign: TextAlign.left,
+
               ),
               TextButton(
                 onPressed: () {
@@ -99,8 +128,8 @@ class HomePageState extends State<HomePage> {
                 },
                 style: TextButton.styleFrom(
                   textStyle: const TextStyle(
-                      fontSize: 16,
-                      color: Color.fromARGB(255, 24, 109, 179),
+                      fontSize: 20,
+                      color: Color.fromARGB(255, 24, 109, 179),fontFamily: "Times new roman", fontWeight: FontWeight.bold,
                       decoration: TextDecoration.underline), // Text style
                 ),
                 child: const Text('See All'),
@@ -109,60 +138,72 @@ class HomePageState extends State<HomePage> {
           ),
           //cards
           SizedBox(
-            height: 200, // Set the desired height for the cards
+            height: 200,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 5, // Number of cards
+              itemCount: 6,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
-                    elevation: 4,
-                    child: Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              10.0), // Atur border radius sesuai keinginan
-                          child: Image.asset(
-                            'assets/images/assets$index.jpeg',
-                            width: 150,
-                            height: 100,
-                            fit: BoxFit.cover,
+                    child: GestureDetector(
+                      onTap: () {
+                        // Navigasi ke halaman MostFav dengan parameter tertentu
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MostFav(),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start, // Aligment teks ke kiri
-                            children: [
-                              Text(mostFavName[index], // Judul
-                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, // Teks tebal
-                                ),
-                              ),
-                              const SizedBox(
-                                  height:8), // Jarak antara judul dan deskripsi
-                              Container(
-                                width: 150,
-                                child: Text(
-                                  mostFavDesc[index], // Deskripsi dari array
-                                  style: TextStyle(fontSize: 14),
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ],
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.asset(
+                              'assets/images/assets$index.jpeg',
+                              width: 200,
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  mostFavName[index],
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Container(
+                                  width: 150,
+                                  child: Text(
+                                    mostFavDesc[index],
+                                    style: TextStyle(fontSize: 14),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 );
               },
             ),
           ),
+
           Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             const Text(
               'Meal Deals',
-              style: TextStyle(fontSize: 16, color: Colors.black),
+              style: TextStyle(fontSize: 20, color: Colors.black, fontFamily: "Times new roman", fontWeight: FontWeight.bold),
               textAlign: TextAlign.left,
             ),
             TextButton(
@@ -174,55 +215,69 @@ class HomePageState extends State<HomePage> {
               },
               style: TextButton.styleFrom(
                 textStyle: const TextStyle(
-                    fontSize: 16,
-                    color: Color.fromARGB(255, 24, 109, 179),
-                    decoration: TextDecoration.underline), // Text style
-              ),
+                      fontSize: 20,
+                      color: Color.fromARGB(255, 24, 109, 179),fontFamily: "Times new roman", fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline), // Text style
+                ),
               child: const Text('See All'),
             ),
           ]),
           SizedBox(
-            height: 200, // Set the desired height for the cards
+            height: 200,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: 5, // Number of cards
+              itemCount: 6,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
-                    elevation: 4,
-                    child: Column(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(
-                              10.0), // Atur border radius sesuai keinginan
-                          child: Image.asset(
-                            'assets/images/meal$index.jpeg',
-                            width: 150,
-                            height: 100,
-                            fit: BoxFit.cover,
+                    child: GestureDetector(
+                      onTap: () {
+                        // Navigasi ke halaman MostFav dengan parameter tertentu
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const MealDeals(),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start, // Aligment teks ke kiri
-                            children: [
-                              Text(mealDealName[index], // Judul
-                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, // Teks tebal
+                        );
+                      },
+                      child: Column(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image.asset(
+                              'assets/images/meal$index.jpeg',
+                              width: 200,
+                              height: 100,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  mealDealName[index],
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                  height:
-                                      8), // Jarak antara judul dan deskripsi
-                              Text(
-                                mealDealDesc[index], // Deskripsi dari array
-                                style: TextStyle(fontSize: 14),
-                              ),
-                            ],
+                                const SizedBox(height: 8),
+                                Container(
+                                  width: 150,
+                                  child: Text(
+                                    mealDealDesc[index],
+                                    style: TextStyle(fontSize: 14, fontFamily: "Times new roman"),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );

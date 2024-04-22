@@ -18,7 +18,7 @@ class MealDeals extends StatelessWidget {
           title: const Text("SYDNEY CBD"),
         ),
       body: ListView.builder(
-        itemCount: 5, // Jumlah kartu yang ingin ditampilkan
+        itemCount: 6, // Jumlah kartu yang ingin ditampilkan
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -35,14 +35,12 @@ class MealDeals extends StatelessWidget {
                   Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start, // Aligment teks ke kiri
+                            // crossAxisAlignment: CrossAxisAlignment.start, // Aligment teks ke kiri
                             children: [
                               Text(mealDealName[index], // Judul
                                 style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, // Teks tebal
                                 ),
                               ),
-                              const SizedBox(
-                                  height:8), // Jarak antara judul dan deskripsi
                               Container(
                                 child: Text(
                                   mealDealDesc[index], // Deskripsi dari array

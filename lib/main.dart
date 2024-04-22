@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+// import 'package:carousel_slider/carousel_slider.dart';
 // import 'mostfav.dart';
 // import 'mealdeals.dart';
 import 'homepage.dart';
@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
               },
             ),
             centerTitle: true,
-            title: const Text("SYDNEY CBD"),
+            title: const Text("SYDNEY CBD", style: TextStyle(fontWeight: FontWeight.bold),),
           ),
           body: const TabBarView(
                   children: [
@@ -46,11 +46,11 @@ class MainApp extends StatelessWidget {
             unselectedLabelColor: Colors.black,
             labelColor: Colors.orange,
             tabs: [
-              Tab(icon: Icon(Icons.home)),
-              Tab(icon: Icon(Icons.place)),
-              Tab(icon: Icon(Icons.bookmark)),
-              Tab(icon: Icon(Icons.emoji_emotions)),
-              Tab(icon: Icon(Icons.person)),
+              Tab(icon: Icon(Icons.home), child: Text("Home", style: TextStyle(fontSize: 10),)),
+              Tab(icon: Icon(Icons.place), child: Text("Discovery", style: TextStyle(fontSize: 10),)),
+              Tab(icon: Icon(Icons.bookmark), child: Text("Bookmark", style: TextStyle(fontSize: 10),)),
+              Tab(icon: Icon(Icons.emoji_events), child: Text("Top Foodie", style: TextStyle(fontSize: 9),)),
+              Tab(icon: Icon(Icons.person), child: Text("Profile", style: TextStyle(fontSize:10),)),
             ],
           ),
         ),

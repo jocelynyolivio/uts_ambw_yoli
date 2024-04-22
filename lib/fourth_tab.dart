@@ -8,47 +8,21 @@ class FourthTab extends StatefulWidget {
 }
 
 class _FourthTabState extends State<FourthTab> {
-  final _textController = TextEditingController();
-  String userPost = '';
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.pink,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(userPost),
-            TextField(
-              controller: _textController,
-              decoration: InputDecoration(
-                hintText: 'What\'s on your mind?',
-                border: const OutlineInputBorder(),
-                prefixIcon: IconButton(
-                  icon: const Icon(Icons.abc),
-                  onPressed: () {},
-                ),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    _textController.clear();
-                  },
-                  icon: const Icon(Icons.clear),
-                ),
-              ),
+    return Scaffold(
+      
+      body: Container(
+        color: Color.fromARGB(255, 233, 135, 30),
+        child: const Center(
+          child: Text(
+            'Account Page',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
             ),
-            MaterialButton(
-              onPressed: () {
-                setState(() {
-                  userPost = _textController.text;
-                });
-              },
-              color: Colors.blue,
-              child: const Text(
-                'Submit',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

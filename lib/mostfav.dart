@@ -18,7 +18,7 @@ class MostFav extends StatelessWidget {
           title: const Text("SYDNEY CBD"),
         ),
       body: ListView.builder(
-        itemCount: 5, // Jumlah kartu yang ingin ditampilkan
+        itemCount: 6, // Jumlah kartu yang ingin ditampilkan
         itemBuilder: (context, index) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
@@ -41,8 +41,7 @@ class MostFav extends StatelessWidget {
                                 style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, // Teks tebal
                                 ),
                               ),
-                              const SizedBox(
-                                  height:8), // Jarak antara judul dan deskripsi
+                              
                               Container(
                                 child: Text(
                                   mostFavDesc[index], // Deskripsi dari array
