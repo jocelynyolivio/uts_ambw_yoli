@@ -38,13 +38,13 @@ class MealDeals extends StatelessWidget {
                             // crossAxisAlignment: CrossAxisAlignment.start, // Aligment teks ke kiri
                             children: [
                               Text(mealDealName[index], // Judul
-                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, // Teks tebal
+                                style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold, // Teks tebal
                                 ),
                               ),
                               Container(
                                 child: Text(
                                   mealDealDesc[index], // Deskripsi dari array
-                                  style: TextStyle(fontSize: 14),
+                                  style: TextStyle(fontSize: 18),
                                 ),
                               ),
                             ],

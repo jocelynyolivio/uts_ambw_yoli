@@ -38,14 +38,14 @@ class MostFav extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start, // Aligment teks ke kiri
                             children: [
                               Text(mostFavName[index], // Judul
-                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, // Teks tebal
+                                style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold, // Teks tebal
                                 ),
                               ),
                               
                               Container(
                                 child: Text(
                                   mostFavDesc[index], // Deskripsi dari array
-                                  style: TextStyle(fontSize: 14),
+                                  style: TextStyle(fontSize: 18),
                                 ),
                               ),
                             ],
