@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'lists.dart';
 
 class MostFav extends StatelessWidget {
   const MostFav({Key? key}) : super(key: key);
@@ -32,12 +33,25 @@ class MostFav extends StatelessWidget {
                     fit: BoxFit.cover, // Penyesuaian gambar
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'Description $index', // Ganti dengan deskripsi sesuai kebutuhan
-                      style: TextStyle(fontSize: 14),
-                    ),
-                  ),
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start, // Aligment teks ke kiri
+                            children: [
+                              Text(mostFavName[index], // Judul
+                                style: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold, // Teks tebal
+                                ),
+                              ),
+                              const SizedBox(
+                                  height:8), // Jarak antara judul dan deskripsi
+                              Container(
+                                child: Text(
+                                  mostFavDesc[index], // Deskripsi dari array
+                                  style: TextStyle(fontSize: 14),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
                 ],
               ),
             ),
