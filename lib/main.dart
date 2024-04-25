@@ -23,12 +23,16 @@ class MainApp extends StatelessWidget {
         length: 5,
         child: Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
+            // leading: IconButton(
+            //   icon: Icon(Icons.home),
+            //   onPressed: () {
+            //     // Navigator.of(context).pop();
+            //     // Navigator.push(
+            //     //         context,
+            //     //         MaterialPageRoute(
+            //     //             builder: (context) => const HomePage()));
+            //   },
+            // ),
             centerTitle: true,
             title: const Text("SYDNEY CBD", style: TextStyle(fontWeight: FontWeight.bold),),
           ),
